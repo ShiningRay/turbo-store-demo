@@ -1,0 +1,13 @@
+<%= turbo_stream.update "server-time" do %>
+  <span class="font-mono text-indigo-600">Server time: <%= @time %></span>
+<% end %>
+
+<turbo-stream action="update_store" target="app">
+  <template>
+    <span data-store-json style="display:none"><%= raw({
+      current_user: { name: @name, role: "member" },
+      cart: { count: @count },
+      notifications: ["Store synced at #{@time}"]
+    }.to_json) %></span>
+  </template>
+</turbo-stream>
